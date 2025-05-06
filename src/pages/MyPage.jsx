@@ -1,0 +1,173 @@
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { useUserStore } from '../store/useUserStore';
+
+const schema = yup.object().shape({
+  userPwd: yup.string().min(6, '6자 이상 입력해주세요').required('비밀번호는 필수입니다'),
+  confirmPwd: yup
+    .string()
+    .oneOf([yup.ref('userPwd'), null], '비밀번호가 일치하지 않습니다')
+    .required('비밀번호 확인은 필수입니다'),
+  name: yup.string().required('이름은 필수입니다'),
+  age: yup.number().typeError('숫자만 입력해주세요').required('나이는 필수입니다'),
+  gender: yup.string().required('성별을 선택해주세요'),
+});
+
+const PageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-top: 140px;
+`;
+
+const FormWrapper = styled.form`
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 30px;
+  background-color: #fff;
+`;
+
+const FormGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const Label = styled.label`
+  font-weight: bold;
+  margin-bottom: 5px;
+`;
+
+const Input = styled.input`
+  height: 35px;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  padding: 0 10px;
+`;
+
+const Select = styled.select`
+  height: 35px;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  padding: 0 10px;
+`;
+
+const LogoImage = styled.img`
+  width: 200px;
+  margin: 0 auto 20px;
+`;
+
+const Button = styled.button`
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #3e3e3e;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #333;
+  }
+`;
+
+const ErrorText = styled.div`
+  font-size: 12px;
+  color: red;
+  height: 16px;
+  margin-top: 4px;
+`;
+
+const MyPage = () => {
+  const { loginUser, updateUser } = useUserStore();
+  const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      userPwd: loginUser?.userPwd || '',
+      confirmPwd: loginUser?.userPwd || '',
+      name: loginUser?.name || '',
+      age: loginUser?.age || '',
+      gender: loginUser?.gender || '',
+    },
+  });
+
+  const onSubmit = async (data) => {
+    const updatedUser = {
+      ...loginUser,
+      userPwd: data.userPwd,
+      name: data.name,
+      age: data.age,
+      gender: data.gender,
+    };
+    await updateUser(updatedUser);
+    alert('수정되었습니다!');
+    navigate('/');
+  };
+
+  const logoUrl = 'https://www.aimyong.net/static/aimyong/fanclub/cmn/logo_fc.png';
+
+  return (
+    <PageWrapper>
+      <FormWrapper onSubmit={handleSubmit(onSubmit)}>
+        <LogoImage src={logoUrl} alt="logo" />
+
+        <FormGroup>
+          <Label>아이디</Label>
+          <Input value={loginUser?.userId} readOnly />
+        </FormGroup>
+
+        <FormGroup>
+          <Label>비밀번호</Label>
+          <Input type="password" {...register('userPwd')} />
+          <ErrorText>{errors.userPwd?.message}</ErrorText>
+        </FormGroup>
+
+        <FormGroup>
+          <Label>비밀번호 확인</Label>
+          <Input type="password" {...register('confirmPwd')} />
+          <ErrorText>{errors.confirmPwd?.message}</ErrorText>
+        </FormGroup>
+
+        <FormGroup>
+          <Label>이름</Label>
+          <Input {...register('name')} />
+          <ErrorText>{errors.name?.message}</ErrorText>
+        </FormGroup>
+
+        <FormGroup>
+          <Label>나이</Label>
+          <Input type="number" {...register('age')} />
+          <ErrorText>{errors.age?.message}</ErrorText>
+        </FormGroup>
+
+        <FormGroup>
+          <Label>성별</Label>
+          <Select {...register('gender')}>
+            <option value="">선택</option>
+            <option value="male">남</option>
+            <option value="female">여</option>
+          </Select>
+          <ErrorText>{errors.gender?.message}</ErrorText>
+        </FormGroup>
+
+        <Button type="submit">수정하기</Button>
+      </FormWrapper>
+    </PageWrapper>
+  );
+};
+
+export default MyPage;
