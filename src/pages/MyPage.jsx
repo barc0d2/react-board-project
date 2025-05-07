@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '../store/useUserStore';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const schema = yup.object().shape({
   userPwd: yup.string().min(6, '6자 이상 입력해주세요').required('비밀번호는 필수입니다'),
@@ -28,16 +29,26 @@ const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   border-radius: 20px;
   padding: 30px;
-  background-color: #fff;
+  background-color: #ffffff;
+`;
+
+const ToggleIcon = styled.span`
+  position: absolute;
+  right: 10px;
+  top: 32px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #666666;
 `;
 
 const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  position: relative;
 `;
 
 const Label = styled.label`
@@ -48,14 +59,14 @@ const Label = styled.label`
 const Input = styled.input`
   height: 35px;
   border-radius: 5px;
-  border: 1px solid #aaa;
+  border: 1px solid #aaaaaa;
   padding: 0 10px;
 `;
 
 const Select = styled.select`
   height: 35px;
   border-radius: 5px;
-  border: 1px solid #aaa;
+  border: 1px solid #aaaaaa;
   padding: 0 10px;
 `;
 
@@ -75,7 +86,7 @@ const Button = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: #333;
+    background-color: #333333;
   }
 `;
 
@@ -89,6 +100,8 @@ const ErrorText = styled.div`
 const MyPage = () => {
   const { loginUser, updateUser } = useUserStore();
   const navigate = useNavigate();
+  const [showPwd, setShowPwd] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const {
     register,
@@ -127,18 +140,26 @@ const MyPage = () => {
 
         <FormGroup>
           <Label>아이디</Label>
-          <Input value={loginUser?.userId} readOnly />
+          <Input value={loginUser?.userId} disabled />
         </FormGroup>
 
         <FormGroup>
           <Label>비밀번호</Label>
-          <Input type="password" {...register('userPwd')} />
+          <Input type={showPwd ? 'text' : 'password'} placeholder="비밀번호를 입력해주세요" {...register('userPwd')} />
+          <ToggleIcon onClick={() => setShowPwd((prev) => !prev)}>{showPwd ? <FaEyeSlash /> : <FaEye />}</ToggleIcon>
           <ErrorText>{errors.userPwd?.message}</ErrorText>
         </FormGroup>
 
         <FormGroup>
           <Label>비밀번호 확인</Label>
-          <Input type="password" {...register('confirmPwd')} />
+          <Input
+            type={showConfirm ? 'text' : 'password'}
+            placeholder="비밀번호를 다시 입력해주세요"
+            {...register('confirmPwd')}
+          />
+          <ToggleIcon onClick={() => setShowConfirm((prev) => !prev)}>
+            {showConfirm ? <FaEyeSlash /> : <FaEye />}
+          </ToggleIcon>
           <ErrorText>{errors.confirmPwd?.message}</ErrorText>
         </FormGroup>
 

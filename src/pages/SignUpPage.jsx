@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useUserStore } from '../store/useUserStore';
 
 const schema = yup.object().shape({
   userId: yup.string().required('아이디는 필수입니다'),
-  userPwd: yup.string().min(6, '비밀번호는 6자 이상 입력해주세요').required('비밀번호는 필수입니다'), //.min을 사용해 최소 숫자자
+  userPwd: yup.string().min(6, '비밀번호는 6자 이상 입력해주세요').required('비밀번호는 필수입니다'),
   confirmPwd: yup
     .string()
-    .oneOf([yup.ref('userPwd'), null], '비밀번호가 일치하지 않습니다') //.oneof를 사용해 일치값값
+    .oneOf([yup.ref('userPwd'), null], '비밀번호가 일치하지 않습니다')
     .required('비밀번호 확인은 필수입니다'),
   name: yup.string().required('이름은 필수입니다'),
-  age: yup.number().typeError('숫자만 입력해주세요').required('나이는 필수입니다'), //number().typeError를 통해 숫자가 아니면 에러 메시지 출력력
+  age: yup.number().typeError('숫자만 입력해주세요').required('나이는 필수입니다'),
   gender: yup.string().required('성별을 선택해주세요'),
 });
 
@@ -29,16 +30,17 @@ const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   border-radius: 20px;
   padding: 30px;
-  background-color: #fff;
+  background-color: #ffffff;
 `;
 
 const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  position: relative;
 `;
 
 const Label = styled.label`
@@ -49,14 +51,23 @@ const Label = styled.label`
 const Input = styled.input`
   height: 35px;
   border-radius: 5px;
-  border: 1px solid #aaa;
+  border: 1px solid #aaaaaa;
   padding: 0 10px;
+`;
+
+const ToggleIcon = styled.span`
+  position: absolute;
+  right: 10px;
+  top: 32px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #666666;
 `;
 
 const Select = styled.select`
   height: 35px;
   border-radius: 5px;
-  border: 1px solid #aaa;
+  border: 1px solid #aaaaaa;
   padding: 0 10px;
 `;
 
@@ -76,7 +87,7 @@ const Button = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: #333;
+    background-color: #333333;
   }
 `;
 
@@ -90,6 +101,8 @@ const ErrorText = styled.div`
 const SignUpPage = () => {
   const navigate = useNavigate();
   const signUp = useUserStore((state) => state.signUp);
+  const [showPwd, setShowPwd] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const {
     register,
@@ -120,13 +133,21 @@ const SignUpPage = () => {
 
         <FormGroup>
           <Label>비밀번호</Label>
-          <Input type="password" placeholder="비밀번호를 입력해주세요" {...register('userPwd')} />
+          <Input type={showPwd ? 'text' : 'password'} placeholder="비밀번호를 입력해주세요" {...register('userPwd')} />
+          <ToggleIcon onClick={() => setShowPwd((prev) => !prev)}>{showPwd ? <FaEyeSlash /> : <FaEye />}</ToggleIcon>
           <ErrorText>{errors.userPwd?.message}</ErrorText>
         </FormGroup>
 
         <FormGroup>
           <Label>비밀번호 확인</Label>
-          <Input type="password" placeholder="비밀번호를 다시 입력해주세요" {...register('confirmPwd')} />
+          <Input
+            type={showConfirm ? 'text' : 'password'}
+            placeholder="비밀번호를 다시 입력해주세요"
+            {...register('confirmPwd')}
+          />
+          <ToggleIcon onClick={() => setShowConfirm((prev) => !prev)}>
+            {showConfirm ? <FaEyeSlash /> : <FaEye />}
+          </ToggleIcon>
           <ErrorText>{errors.confirmPwd?.message}</ErrorText>
         </FormGroup>
 

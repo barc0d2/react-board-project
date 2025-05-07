@@ -68,6 +68,7 @@ const PageWrapper = styled.div`
 
 const Content = styled.main`
   flex: 1;
+  margin-top: 40px;
 `;
 
 const HomePage = () => {

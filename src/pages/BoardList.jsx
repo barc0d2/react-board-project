@@ -13,8 +13,8 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   width: 960px;
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
   border-radius: 20px;
   margin: 60px;
   padding: 60px;
@@ -35,7 +35,7 @@ const PostList = styled.ul`
 
 const PostItem = styled.li`
   padding: 20px 0;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #dddddd;
   transition: all 0.2s ease;
 
   &:hover {
@@ -46,13 +46,13 @@ const PostItem = styled.li`
 const PostAuthor = styled.div`
   font-size: 14px;
   font-weight: 600;
-  color: #222;
+  color: #222222;
   margin-bottom: 6px;
 `;
 
 const PostTitle = styled(Link)`
   font-size: 16px;
-  color: #111;
+  color: #111111;
   text-decoration: none;
   display: block;
   line-height: 1.6;

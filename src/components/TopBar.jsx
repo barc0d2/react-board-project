@@ -92,7 +92,9 @@ const TopBar = () => {
           <li>
             <StyledLink to="/Board">Board</StyledLink>
           </li>
-          <li>Shop</li>
+          <li>
+            <StyledLink to="*">Shop</StyledLink>
+          </li>
           {!loginUser ? (
             <>
               <li>

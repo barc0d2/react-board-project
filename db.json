@@ -2,38 +2,17 @@
   "posts": [
     {
       "id": "53f5",
-      "title": "12312414",
-      "content": "21412",
+      "title": "안녕하세요",
+      "content": "테스트 12345",
       "author": "전진영",
       "date": "2025-05-06"
     },
     {
-      "title": "1231231231",
-      "content": "3123131231",
-      "author": "익명",
-      "date": "2025-05-06",
-      "id": "1b5f"
-    },
-    {
-      "title": "31231231",
-      "content": "3123123321312",
+      "title": "테스트123456",
+      "content": "Font Awesome logo and wordmark in a neon style\n  \nHey there,\n\n  \n  \nA huge thanks to everyone who pre-ordered Font Awesome 7 — we’re excited to release the upgraded icons, toolkit improvements, and new Pro+ packs!\n\n  \n  \nRig3123t now, we’re focused on wrapping up the finishing touches ahead of the official launch in June.",
       "author": "1234",
-      "date": "2025-05-06",
+      "date": "2025-05-07",
       "id": "7c02"
-    },
-    {
-      "id": "7b22",
-      "title": "321313123",
-      "content": "2131",
-      "author": "1234",
-      "date": "2025-05-06"
-    },
-    {
-      "id": "bda1",
-      "title": "3213123",
-      "content": "123123123",
-      "author": "1234",
-      "date": "2025-05-06"
     }
   ],
   "users": [
@@ -42,7 +21,7 @@
       "userId": "1234",
       "userPwd": "123456",
       "name": "전진영",
-      "age": 2522,
+      "age": 25,
       "gender": "male"
     },
     {

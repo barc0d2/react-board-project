@@ -16,7 +16,7 @@ const PageWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   border-radius: 20px;
-  background-color: #fff;
+  background-color: #ffffff;
 `;
 
 const FormWrapper = styled.form`
@@ -25,7 +25,7 @@ const FormWrapper = styled.form`
   flex-direction: column;
   align-items: flex-end;
   gap: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   border-radius: 20px;
   padding: 30px;
 `;
@@ -45,7 +45,7 @@ const Label = styled.label`
 const Input = styled.input`
   height: 35px;
   border-radius: 5px;
-  border: 1px solid #aaa;
+  border: 1px solid #aaaaaa;
   padding: 0 10px;
 `;
 
@@ -73,7 +73,7 @@ const Button = styled.button`
   margin-top: 10px;
 
   &:hover {
-    background-color: #333;
+    background-color: #333333;
   }
 `;
 
