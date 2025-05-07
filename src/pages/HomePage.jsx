@@ -25,7 +25,7 @@ const SlideItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #eee;
+  background: #eeeeee;
 
   img {
     width: 100%;
@@ -69,6 +69,49 @@ const PageWrapper = styled.div`
 const Content = styled.main`
   flex: 1;
   margin-top: 40px;
+`;
+
+const Section = styled.section`
+  max-width: 1080px;
+  margin: 80px auto;
+  padding: 0 20px;
+`;
+
+const SectionTitle = styled.h2`
+  text-align: center;
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  margin-bottom: 60px;
+`;
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 60px 40px;
+  justify-items: center;
+`;
+
+const ContentItem = styled.div`
+  text-align: center;
+`;
+
+const ContentImage = styled.img`
+  width: 120px;
+  height: 120px;
+  margin-bottom: 20px;
+`;
+
+const ContentTitle = styled.h3`
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+`;
+
+const ContentDesc = styled.p`
+  font-size: 16px;
+  color: #333;
+  line-height: 1.5;
 `;
 
 const HomePage = () => {
@@ -119,6 +162,47 @@ const HomePage = () => {
           </SlideTrack>
         </SlideWrapper>
       </Content>
+
+      <Section>
+        <SectionTitle>MEMBER CONTENTS</SectionTitle>
+        <Grid>
+          <ContentItem>
+            <ContentImage
+              src="https://www.aimyong.net/static/aimyong/fanclub/top/202405/ico_diary-min.png"
+              alt="Diary"
+            />
+            <ContentTitle>DIARY</ContentTitle>
+            <ContentDesc>AIMYON 매일을 철저하는 블로그입니다.</ContentDesc>
+          </ContentItem>
+
+          <ContentItem>
+            <ContentImage
+              src="https://www.aimyong.net/static/aimyong/fanclub/top/202405/ico_mypage-min.png"
+              alt="Staff Blog"
+            />
+            <ContentTitle>STAFF BLOG</ContentTitle>
+            <ContentDesc>AIMYON의 무대 뒤를 사진으로 전달하는 스탭 블로그입니다.</ContentDesc>
+          </ContentItem>
+
+          <ContentItem>
+            <ContentImage
+              src="https://www.aimyong.net/static/aimyong/fanclub/top/202405/ico_movie-min.png"
+              alt="Movie"
+            />
+            <ContentTitle>MOVIE</ContentTitle>
+            <ContentDesc>AIM만으로 볼 수 있는 오리지널 동영상을 수시로 전달합니다.</ContentDesc>
+          </ContentItem>
+
+          <ContentItem>
+            <ContentImage
+              src="https://www.aimyong.net/static/aimyong/fanclub/top/202405/ico_radio-min.png"
+              alt="Radio"
+            />
+            <ContentTitle>RADIO</ContentTitle>
+            <ContentDesc>여기에서만 무료 토크를 제공하는 포인트 라디오 콘텐츠입니다.</ContentDesc>
+          </ContentItem>
+        </Grid>
+      </Section>
 
       <Footer />
     </PageWrapper>

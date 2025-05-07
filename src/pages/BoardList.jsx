@@ -43,10 +43,12 @@ const PostItem = styled.li`
   }
 `;
 
-const PostAuthor = styled.div`
+const PostMeta = styled.div`
+  display: flex;
+  justify-content: space-between;
   font-size: 14px;
   font-weight: 600;
-  color: #222222;
+  color: #555;
   margin-bottom: 6px;
 `;
 
@@ -95,7 +97,10 @@ const BoardList = () => {
           {Array.isArray(posts) &&
             posts.map((post) => (
               <PostItem key={post.id}>
-                <PostAuthor>{post.author || '익명'}</PostAuthor>
+                <PostMeta>
+                  <div>{post.author || '익명'}</div>
+                  <div>{post.date || ''}</div>
+                </PostMeta>
                 <PostTitle to={`/board/${post.id}`}>{post.title}</PostTitle>
                 {loginUser?.userId === post.author && <button onClick={() => handleDelete(post.id)}>삭제</button>}
               </PostItem>

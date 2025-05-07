@@ -15,8 +15,8 @@ const Form = styled.form`
   width: 960px;
   padding: 60px;
   margin-top: 20px;
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
   border-radius: 20px;
 `;
 
@@ -30,7 +30,7 @@ const Input = styled.input`
   width: 100%;
   padding: 16px;
   margin-bottom: 24px;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   border-radius: 4px;
   font-size: 18px;
 `;
@@ -40,7 +40,7 @@ const TextArea = styled.textarea`
   height: 400px;
   padding: 16px;
   margin-bottom: 24px;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   border-radius: 4px;
   font-size: 18px;
   resize: none;
@@ -58,7 +58,7 @@ const Button = styled.button`
   font-size: 16px;
 
   &:hover {
-    background-color: #333;
+    background-color: #333333;
   }
 `;
 

@@ -13,8 +13,8 @@ const Container = styled.div`
 const Wrapper = styled.div`
   width: 960px;
   padding: 60px;
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
   border-radius: 20px;
 `;
 
@@ -28,7 +28,7 @@ const Content = styled.p`
   font-size: 16px;
   line-height: 1.6;
   white-space: pre-wrap;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #eeeeee;
   padding-top: 20px;
   margin-bottom: 40px;
 `;
@@ -40,7 +40,7 @@ const NavLinks = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  color: #333;
+  color: #333333;
   text-decoration: none;
   &:hover {
     text-decoration: underline;

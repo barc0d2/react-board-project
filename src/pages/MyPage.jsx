@@ -21,7 +21,6 @@ const schema = yup.object().shape({
 const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 140px;
 `;
 
 const FormWrapper = styled.form`
